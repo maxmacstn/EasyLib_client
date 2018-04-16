@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1127</width>
-    <height>758</height>
+    <width>965</width>
+    <height>718</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,8 +23,8 @@
      <height>0</height>
     </size>
    </property>
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="1" column="0">
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="minimumSize">
        <size>
@@ -33,7 +33,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="login_page">
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -72,7 +72,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Welcome To EasyLibrary</string>
+             <string>Welcome To SmartLibrary System</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -197,6 +197,28 @@
            </layout>
           </item>
          </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_IDerror">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="font">
+           <font>
+            <family>Roboto Medium</family>
+            <pointsize>16</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color : red</string>
+          </property>
+          <property name="text">
+           <string>Error! Invalid Identification number</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
         </item>
         <item>
          <layout class="QHBoxLayout" name="InputHorizon">
@@ -832,7 +854,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_4">
+           <widget class="QLabel" name="label_borrow_name">
             <property name="font">
              <font>
               <family>Roboto</family>
@@ -845,7 +867,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_6">
+           <widget class="QLabel" name="label_borrow_id">
             <property name="font">
              <font>
               <family>Roboto Light</family>
@@ -869,6 +891,19 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_line_connect">
+            <property name="font">
+             <font>
+              <family>Roboto</family>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Connect Line Notify</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -1470,7 +1505,7 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_9">
           <item>
-           <widget class="QPushButton" name="pushButton_back">
+           <widget class="QPushButton" name="pushButton_back_to_p1">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -1508,6 +1543,23 @@
            </widget>
           </item>
           <item>
+           <widget class="QLabel" name="label_borrow_error">
+            <property name="font">
+             <font>
+              <family>Roboto</family>
+              <pointsize>18</pointsize>
+              <stylestrategy>PreferDefault</stylestrategy>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: red; margin-left: 20px</string>
+            </property>
+            <property name="text">
+             <string>Error text</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="horizontalSpacer_5">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -1521,7 +1573,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_confirm_order">
+           <widget class="QPushButton" name="pushButton_confirm_borrow">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -1530,7 +1582,7 @@
             </property>
             <property name="font">
              <font>
-              <family>Roboto</family>
+              <family>Roboto Medium</family>
               <pointsize>20</pointsize>
              </font>
             </property>
@@ -1546,6 +1598,193 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="checkout_success_page">
+       <layout class="QVBoxLayout" name="verticalLayout_11">
+        <item>
+         <spacer name="verticalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="font">
+           <font>
+            <family>Roboto Medium</family>
+            <pointsize>20</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Your books has been checked out successful.</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <spacer name="horizontalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_due_date_is">
+            <property name="font">
+             <font>
+              <family>Roboto</family>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Your due date is</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_due_date">
+            <property name="font">
+             <font>
+              <family>Roboto</family>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>1 January 2018</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_8">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_7">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="page">
+       <layout class="QVBoxLayout" name="verticalLayout_9">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>Roboto Medium</family>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Connect to Line Notify Services</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_9">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_line_connect_back">
+            <property name="font">
+             <font>
+              <family>Roboto Thin</family>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Back</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QWidget" name="webView" native="true">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_line_connect_success">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Roboto Thin</family>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Connected to Line Notify</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -1555,7 +1794,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1127</width>
+     <width>965</width>
      <height>21</height>
     </rect>
    </property>

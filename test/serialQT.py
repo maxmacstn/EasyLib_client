@@ -35,7 +35,7 @@ from PyQt5.QtWidgets import *
 from queue import Queue
 import serial
 
-SERIALPORT = 'COM3'
+SERIALPORT = 'COM11'
 
 
 class GuiPart(QMainWindow):

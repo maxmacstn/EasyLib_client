@@ -13,3 +13,14 @@ class Book:
         self.author = author
         self.publisher = publisher
         self.publishedDate = publishedDate
+
+    def getSimpleStringInfo(self):
+        return self.title+", " +self.author
+
+    #Compare method for book (Compare by ID)
+    def __eq__(self, other):
+        return self.bookID == other.bookID
+
+
+
+

@@ -14,7 +14,7 @@ void setup()
   mfrc522.PCD_Init();   // Initiate MFRC522
   //mfrc522.PCD_WriteRegister(0x26, (0x07<<4)); // Set Rx Gain to max
   mfrc522.PCD_SetAntennaGain(mfrc522.RxGain_max);
-  Serial.println("Put your card to the reader...");
+  Serial.println("RFID Reader is ready..");
   Serial.println();
  
 }
