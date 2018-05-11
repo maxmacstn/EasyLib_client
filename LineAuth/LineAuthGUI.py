@@ -24,7 +24,17 @@ class LineAuthGUI(QMainWindow, form_class):
         QMainWindow.__init__(self, parent)
         self.setupUi(self)
         self.webView = QtWebEngineWidgets.QWebEngineView(self.webView)
+        self.webView.setFixedWidth(500)
+        self.webView.setFixedHeight(500)
+        print(str(self.verticalLayout.geometry().width()) +", " + str(self.verticalLayout.geometry().height()))
+
+
+        # s
+        # self.webView.setFixedWidth(self.verticalLayout.geometry().width())
+        # self.webView.setFixedHeight(self.verticalLayout.geometry().height())
+        # self.webView.setGeometry()
         self.pushButton.clicked.connect(self.loginAuth)
+        # self.pushButton.resized.connect(self.onResize)
 
     def loginAuth(self):
         URL = 'https://notify-bot.line.me/oauth/authorize?'
@@ -35,6 +45,8 @@ class LineAuthGUI(QMainWindow, form_class):
         URL += '&state=' + self.lineEdit.text()
         self.webView.load(QtCore.QUrl().fromUserInput(URL))
         self.webView.urlChanged.connect(self.checkURL)
+        self.webView.setFixedWidth(500)
+        self.webView.setFixedHeight(500)
 
     def checkURL(self):
         url = self.webView.url().toDisplayString()
@@ -64,6 +76,16 @@ class LineAuthGUI(QMainWindow, form_class):
             return
 
         print("Token " + response_json['access_token'])
+
+
+    def resizeEvent(self, event):
+
+        print(str(self.verticalLayout.geometry().width()) +", " + str(self.verticalLayout.geometry().height()))
+        # self.webView.setGeometry(self.verticalLayout.geometry())
+        self.webView.setFixedWidth(self.verticalLayout.geometry().width())
+
+        self.webView.setFixedHeight(self.verticalLayout.geometry().height())
+
 
 
 app = QApplication(sys.argv)

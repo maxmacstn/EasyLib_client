@@ -5,7 +5,7 @@ from pyzbar.pyzbar import decode
 
 
 class CameraScanner(Scanner):
-    def __init__(self,parent,cam, width, height, fps):
+    def __init__(self,parent, width, height, fps, cam = 0):
         Scanner.__init__(self,parent)
         self.running = True
         self.imgQueue = Queue()

@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>965</width>
-    <height>718</height>
+    <width>1366</width>
+    <height>768</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1366</width>
+    <height>768</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
@@ -33,7 +39,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="login_page">
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -149,7 +155,7 @@
                </font>
               </property>
               <property name="text">
-               <string>00000000</string>
+               <string>59090030</string>
               </property>
               <property name="maxLength">
                <number>8</number>
@@ -842,6 +848,12 @@
          <layout class="QHBoxLayout" name="horizontalLayout_5">
           <item>
            <widget class="QLabel" name="label_3">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="font">
              <font>
               <family>Roboto Medium</family>
@@ -855,6 +867,15 @@
           </item>
           <item>
            <widget class="QLabel" name="label_borrow_name">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Ignored">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="font">
              <font>
               <family>Roboto</family>
@@ -862,7 +883,7 @@
              </font>
             </property>
             <property name="text">
-             <string>John Doe</string>
+             <string>John</string>
             </property>
            </widget>
           </item>
@@ -880,20 +901,19 @@
            </widget>
           </item>
           <item>
-           <spacer name="horizontalSpacer_6">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+           <widget class="QPushButton" name="pushButton_line_connect">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
-            <property name="sizeHint" stdset="0">
+            <property name="minimumSize">
              <size>
-              <width>40</width>
-              <height>20</height>
+              <width>200</width>
+              <height>65</height>
              </size>
             </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_line_connect">
             <property name="font">
              <font>
               <family>Roboto</family>
@@ -901,7 +921,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Connect Line Notify</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1700,7 +1720,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="page">
+      <widget class="QWidget" name="line_connect_page">
        <layout class="QVBoxLayout" name="verticalLayout_9">
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -1752,36 +1772,40 @@
          </layout>
         </item>
         <item>
-         <widget class="QWidget" name="webView" native="true">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_line_connect_success">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="font">
-           <font>
-            <family>Roboto Thin</family>
-            <pointsize>12</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Connected to Line Notify</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
+         <layout class="QVBoxLayout" name="verticalLayout_12">
+          <item>
+           <widget class="QWidget" name="webView" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_line_connect_status">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>Roboto Thin</family>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Connected to Line Notify</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -1794,7 +1818,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>965</width>
+     <width>1366</width>
      <height>21</height>
     </rect>
    </property>
