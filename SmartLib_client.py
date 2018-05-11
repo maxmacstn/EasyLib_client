@@ -127,9 +127,9 @@ class SmartLibGUI(QMainWindow, form_class):
             self.camIDscan.resume()
 
         # if not self.RFIDScanner.isAlive():
-        #     self.RFIDScanner.start()
+        self.RFIDScanner.start()
         # else:
-        self.RFIDScanner.resume()
+        # self.RFIDScanner.resume()
 
     def hideErrorMessage(self):
         self.label_IDerror.hide()
