@@ -29,7 +29,7 @@ class SmartLibGUI(QMainWindow, form_class):
         self.setupUi(self)
 
         self.currentUser = None
-        self.userDAO = UserDAO.UserDAO(self, "10.0.0.1")
+        self.userDAO = UserDAO.UserDAO(self)
         self.bookDAO = BookDAO.BookDAO(self, "10.0.0.1")
 
         self.window_width_idScan = self.groupBox_scanner.geometry().width()
@@ -251,10 +251,11 @@ class SmartLibGUI(QMainWindow, form_class):
             Thread(target=self.userDAO.getUserFromRFID_ID, args=[ID]).start()
 
         else:
-            if len(ID) != 8 or not str(ID).isdigit():
-                QMessageBox.warning(self, "Error while parsing input", "Invalid student ID")
-                self.init_page_1()
-                return
+            # TODO: !!!! Not validate id input (For testing with sever only)!!!!
+            # if len(ID) != 8 or not str(ID).isdigit():
+            #     QMessageBox.warning(self, "Error while parsing input", "Invalid student ID")
+            #     self.init_page_1()
+            #     return
             Thread(target=self.userDAO.getUserFromID, args=[ID]).start()
 
     # Add book from ID (Same function as validateStuID, but for Book.)
