@@ -30,7 +30,7 @@ class SmartLibGUI(QMainWindow, form_class):
 
         self.currentUser = None
         self.userDAO = UserDAO.UserDAO(self)
-        self.bookDAO = BookDAO.BookDAO(self, "10.0.0.1")
+        self.bookDAO = BookDAO.BookDAO(self)
 
         self.window_width_idScan = self.groupBox_scanner.geometry().width()
         self.window_height_idScan = self.groupBox_scanner.geometry().height()
@@ -294,7 +294,7 @@ class SmartLibGUI(QMainWindow, form_class):
             i = len(self.bookBasket) - 1
 
             self.tableWidget_addBooks.insertRow(i)
-            self.tableWidget_addBooks.setItem(i, 0, QTableWidgetItem(str(self.bookBasket[i].bookID)))
+            self.tableWidget_addBooks.setItem(i, 0, QTableWidgetItem(str(self.bookBasket[i].book_id)))
             self.tableWidget_addBooks.setItem(i, 1, QTableWidgetItem(str(self.bookBasket[i].title)))
             self.tableWidget_addBooks.setItem(i, 2, QTableWidgetItem(str(self.bookBasket[i].author)))
             header = self.tableWidget_addBooks.horizontalHeader()
@@ -398,7 +398,7 @@ def launch(cameraPort, RFIDPort):
     app = QApplication(sys.argv)
     print("Hello")
     w = SmartLibGUI(None,cameraPort=cameraPort,rfidPort=RFIDPort)
-    w.setWindowTitle('EasyLib - Book Scanner')
+    w.setWindowTitle('SmartLibrary - Book Scanner')
     w.show()
     app.exec_()
 

@@ -1,6 +1,6 @@
 class User:
-    def __init__(self, id, name, registered_on, email, is_active, lineToken = None):
-        self.id = id
+    def __init__(self, user_id, name, registered_on, email, is_active, lineToken = None):
+        self.user_id = user_id
         self.name = name
         self.lineToken  = lineToken
         self.registered_on = registered_on
@@ -11,7 +11,7 @@ class User:
         return self.name
 
     def getID(self):
-        return self.id
+        return self.user_id
 
     def getLineNotifyToken(self):
         return self.lineToken
