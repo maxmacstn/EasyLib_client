@@ -1,3 +1,4 @@
+import json
 from datetime import datetime
 
 import requests
@@ -14,24 +15,33 @@ class BorrowManager(AbstractDAO):
         AbstractDAO.__init__(self)
         self.parent = parent
 
-    def borrow(self, user, book):
-        borrow_request = {"user": user, "book": book}
+    def borrow(self, user, books):
+        borrow_list = []
+        for book in books:
+            borrow_list.append({"user": {"user_id": user.user_id}, "book": {"book_id": book.book_id}})
 
-        response = requests.post(self.server_ip + '/borrow/', json=borrow_request)
+        response = requests.post(self.server_ip + '/borrow', json=borrow_list)
 
-        book_circulation = self.construct_book_ciruclation(response.json())
+
+        book_circulations = []
+        for raw_book_circulation in response.json():
+            book_circulations.append(self.construct_book_ciruclation(raw_book_circulation))
+
 
         if self.parent is not None:
-            self.parent.callback(book_circulation)
+            due_time = book_circulations[0].due_time
+            print(str(due_time))
+            self.parent.borrowBookCallback(due_time)
 
-        return book_circulation
+        return book_circulations
 
     @staticmethod
     def construct_book_ciruclation(arguments):
         time_args = ["borrow_time", "due_time", "return_time"]
 
         for time_arg in time_args:
-            arguments[time_arg] = datetime.strptime(arguments[time_arg], rfc_822_format)
+            if time_arg in arguments.keys() and arguments[time_arg] is not None:
+                arguments[time_arg] = datetime.strptime(arguments[time_arg], rfc_822_format)
 
         arguments["book"] = BookDAO.constructBook(arguments["book"])
         arguments["user"] = UserDAO.constructUser(arguments["user"])

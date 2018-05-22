@@ -1,6 +1,6 @@
 class BookCirculation:
-    def __init__(self, id, book, user, borrow_time, due_time, return_time = None):
-        self.id = id
+    def __init__(self, borrow_id, book, user, borrow_time, due_time, return_time = None):
+        self.borrow_id = borrow_id
         self.book = book
         self.user = user
         self.borrow_time = borrow_time

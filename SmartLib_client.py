@@ -9,6 +9,7 @@ from Book import Book
 from threading import Timer, Thread
 import urllib.parse as urlparse
 from LineAuth import API_key
+import BorrowManager
 
 form_class = uic.loadUiType("easy_lib_client.ui")[0]
 
@@ -77,6 +78,9 @@ class SmartLibGUI(QMainWindow, form_class):
 
         self.bookBasket = []
 
+        self.cd_timer = QtCore.QTimer(self)
+        self.cd_time = 5
+
         self.init_page_1()
 
     def resizeEvent(self, event):
@@ -126,8 +130,8 @@ class SmartLibGUI(QMainWindow, form_class):
         else:
             self.camIDscan.resume()
 
-        # if not self.RFIDScanner.isAlive():
-        self.RFIDScanner.start()
+        if not self.RFIDScanner.isAlive():
+            self.RFIDScanner.start()
         # else:
         # self.RFIDScanner.resume()
 
@@ -276,7 +280,7 @@ class SmartLibGUI(QMainWindow, form_class):
 
     def addBook(self, book: Book):
         self.progressBar_query.setVisible(False)
-
+        self.lineEdit_bookID.clear()
         if (book is None):
             print("No books found")
             self.label_borrow_error.setText("No book found!!")
@@ -308,21 +312,36 @@ class SmartLibGUI(QMainWindow, form_class):
             self.label_borrow_error.show()
             Timer(5, self.hideErrorMessage).start()
             return
-        Thread(target=self.bookDAO.borrowBooks, args=[self.bookBasket, self.currentUser]).start()
+        self.camIDscan.pause()
+        borrowManager = BorrowManager.BorrowManager(self)
+        Thread(target=borrowManager.borrow, args=[self.currentUser, self.bookBasket]).start()
         self.stackedWidget.setCurrentIndex(1)
 
     def init_page_3(self):
         self.stackedWidget.setCurrentIndex(3)
 
+    def countdown_to_home(self):
+        self.cd_time -= 1
+        print("cd " +  str(self.cd_time))
+        self.label_cd_to_homepage.setText(str(self.cd_time))
+
+        if self.cd_time == 0:
+            self.cd_timer.stop()
+            self.cd_time = 5
+            self.init_page_1()
+
+
     def borrowBookCallback(self, returnDate):
         if returnDate == None:
             self.stackedWidget.setCurrentIndex(2)
         else:
-            print(returnDate.strftime('%d %m %Y'))
+            print(returnDate.strftime('%d/%m/%Y'))
             self.stackedWidget.setCurrentIndex(3)
             self.label_due_date.setText(returnDate.strftime('%d %m %Y'))
             Timer(0.2, self.init_page_3).start()
             Timer(5, self.init_page_1).start()
+            # self.cd_timer.timeout.connect(self.countdown_to_home)
+            # self.cd_timer.start(1000)
 
     def onLineConnectButtonClicked(self):
         self.webView.setFixedHeight(724)
