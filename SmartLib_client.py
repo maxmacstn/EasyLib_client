@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import *
 import sys, cv2, requests, json
 from DAO import UserDAO, BookDAO
 from CameraViewerWidget import CameraViewerWidget
+from DAO.AbstractDAO import AbstractDAO
 from Scanner.CameraScanner import CameraScanner
 from Scanner.RFIDScanner import RFIDScanner
 from Book import Book
@@ -402,7 +403,8 @@ class SmartLibGUI(QMainWindow, form_class):
             token = response_json['access_token']
 
             print("Token " + token)
-            self.currentUser.setLineNotifyToken(token)
+            requests.put(AbstractDAO().server_ip + "/user/" + self.currentUser.getID + "/token",
+                        data=json.dumps({"line_token": token}))
             self.label_line_connect_status.setText("Connected to Line Notify")
         except Exception:
             self.label_line_connect_status.setText("Line connect failed.")
