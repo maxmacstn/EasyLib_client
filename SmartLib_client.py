@@ -81,6 +81,7 @@ class SmartLibGUI(QMainWindow, form_class):
 
         self.cd_timer = QtCore.QTimer(self)
         self.cd_time = 5
+        self.cd_timer.timeout.connect(self.countdown_to_home)
 
         self.init_page_1()
 
@@ -341,7 +342,6 @@ class SmartLibGUI(QMainWindow, form_class):
             self.label_due_date.setText(returnDate.strftime('%d %m %Y'))
             Timer(0.2, self.init_page_3).start()
             Timer(5, self.init_page_1).start()
-            # self.cd_timer.timeout.connect(self.countdown_to_home)
             # self.cd_timer.start(1000)
 
     def onLineConnectButtonClicked(self):
@@ -403,16 +403,16 @@ class SmartLibGUI(QMainWindow, form_class):
             token = response_json['access_token']
 
             print("Token " + token)
-            requests.put(AbstractDAO().server_ip + "/user/" + self.currentUser.getID + "/token",
-                        data=json.dumps({"line_token": token}))
+            requests.put(AbstractDAO().server_ip + "/user/" + str(self.currentUser.user_id) + "/token",
+                        json={"line_token": token})
             self.label_line_connect_status.setText("Connected to Line Notify")
+
         except Exception:
             self.label_line_connect_status.setText("Line connect failed.")
 
         self.webView.hide()
-
         self.label_line_connect_status.show()
-        Timer(2, self.init_page_2)
+        Timer(2, self.init_page_2).start()
 
 
 def launch(cameraPort, RFIDPort):
