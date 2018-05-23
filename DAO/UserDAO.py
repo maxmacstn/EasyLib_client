@@ -83,11 +83,17 @@ class UserDAO(AbstractDAO):
 
     def getUserFromID(self, id):
         print("Get info id : " + str(id))
-        response = requests.get(self.server_ip + '/user/' + str(id))
-        user = None
+        try :
+            response = requests.get(self.server_ip + '/user/' + str(id), timeout = self.timeout)
+            user = None
+            if response.status_code == 200:   # Success
+                user = self.constructUser(response.json())
 
-        if response.status_code == 200:
-            user = self.constructUser(response.json())
+        except requests.exceptions.ConnectTimeout:  # Connection timeout, use offline mockup data
+            user = User(3,"OFFLINE USER",datetime.now(),"Test@gmail.com",True)
+            print("Waring! use offline data for debugging only")
+
+
 
         if self.parent is not None:
             self.parent.login_callback(user)
@@ -95,10 +101,15 @@ class UserDAO(AbstractDAO):
         return user
 
     def getUserFromRFID_ID(self, rfid):
-        response = requests.get(self.server_ip + '/user/rfid/' + str(rfid))
-        user = None
-        if response.status_code == 200:
-            user = self.constructUser(response.json())
+        try:
+            response = requests.get(self.server_ip + '/user/rfid/' + str(rfid), timeout=self.timeout)
+            user = None
+            if response.status_code == 200:     #Success
+                user = self.constructUser(response.json())
+
+        except requests.exceptions.ConnectTimeout:    # Connection timeout, use offline mockup data
+            user = User(3,"OFFLINE USER",datetime.now(),"Test@gmail.com",True)
+            print("Waring! use offline data for debugging only")
 
         if self.parent is not None:
             self.parent.login_callback(user)

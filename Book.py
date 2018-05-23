@@ -24,12 +24,11 @@
 
 
 class Book:
-    def __init__(self, book_id, title, isbn, added_on, is_available,author,publisher):
+    def __init__(self, book_id, title, isbn, added_on, author, publisher, rfid=None):
         self.book_id = book_id
         self.title = title
         self.isbn = isbn
         self.added_on = added_on
-        self.is_available = is_available
         self.author = author
         self.publisher = publisher
 

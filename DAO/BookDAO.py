@@ -6,6 +6,7 @@ from datetime import datetime
 from DAO.AbstractDAO import AbstractDAO
 from constant import rfc_822_format
 import requests
+import random
 
 #
 # class BookDAO:
@@ -91,23 +92,31 @@ class BookDAO(AbstractDAO):
         self.parent = parent
 
     def getBookFromID(self, id):
-        response = requests.get(self.server_ip + '/book/' + str(id))
-
-        book = None
-        if response.status_code == 200:
-            book = self.constructBook(response.json())
-
+        try:
+            response = requests.get(self.server_ip + '/book/' + str(id), timeout = self.timeout)
+            book = None
+            if response.status_code == 200:
+                book = self.constructBook(response.json())
+        except requests.exceptions.ConnectTimeout:  # Connection timeout, use offline mockup data
+            book = Book(random.randint(100,1000),"Offline book", "-",datetime.now(),True,"Offline guy",
+                        "Offline press .ltd")
+            print("Waring! use offline data for debugging only")
         if self.parent is not None:
             self.parent.addBook(book)
 
         return book
 
     def getBookFromRFID_ID(self, rfid):
-        response = requests.get(self.server_ip + '/book/rfid/' + str(rfid))
+        try:
+            response = requests.get(self.server_ip + '/book/rfid/' + str(rfid), timeout = self.timeout)
+            book = None
+            if response.status_code == 200:
+                book = self.constructBook(response.json())
+        except requests.exceptions.ConnectTimeout:  # Connection timeout, use offline mockup data
+            book = Book(random.randint(100, 1000), "Offline book", "-", datetime.now(), True, "Offline guy",
+                        "Offline press .ltd")
+            print("Waring! use offline data for debugging only")
 
-        book = None
-        if response.status_code == 200:
-            book = self.constructBook(response.json())
 
         if self.parent is not None:
             self.parent.addBook(book)

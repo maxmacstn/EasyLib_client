@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import requests
 
@@ -20,18 +20,20 @@ class BorrowManager(AbstractDAO):
         for book in books:
             borrow_list.append({"user": {"user_id": user.user_id}, "book": {"book_id": book.book_id}})
 
-        response = requests.post(self.server_ip + '/borrow', json=borrow_list)
+        try:
+            response = requests.post(self.server_ip + '/borrow', json=borrow_list, timeout = self.timeout)
+            if response.status_code == 200:   #Success
+                book_circulations = []
+                for raw_book_circulation in response.json():
+                    book_circulations.append(self.construct_book_ciruclation(raw_book_circulation))
 
+                if self.parent is not None:
+                    due_time = book_circulations[0].due_time
+                    print(str(due_time))
+                    self.parent.borrowBookCallback(due_time)
+        except requests.exceptions.ConnectTimeout:  # Connection timeout, use offline mockup data
+            self.parent.borrowBookCallback(datetime.now() + timedelta(days=7))
 
-        book_circulations = []
-        for raw_book_circulation in response.json():
-            book_circulations.append(self.construct_book_ciruclation(raw_book_circulation))
-
-
-        if self.parent is not None:
-            due_time = book_circulations[0].due_time
-            print(str(due_time))
-            self.parent.borrowBookCallback(due_time)
 
         return book_circulations
 
