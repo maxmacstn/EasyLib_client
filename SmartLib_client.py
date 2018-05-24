@@ -333,9 +333,16 @@ class SmartLibGUI(QMainWindow, form_class):
             self.init_page_1()
 
 
-    def borrowBookCallback(self, returnDate):
+    def borrowBookCallback(self, returnDate, error_clause = None):
         if returnDate == None:
+            self.camIDscan.resume()
             self.stackedWidget.setCurrentIndex(2)
+            self.label_borrow_error.setText("Error borrow book : "+ error_clause)
+            self.label_borrow_error.show()
+            Timer(5, self.hideErrorMessage).start()
+            return
+
+
         else:
             print(returnDate.strftime('%d/%m/%Y'))
             self.stackedWidget.setCurrentIndex(3)

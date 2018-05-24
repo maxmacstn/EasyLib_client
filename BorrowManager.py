@@ -20,8 +20,11 @@ class BorrowManager(AbstractDAO):
         for book in books:
             borrow_list.append({"user": {"user_id": user.user_id}, "book": {"book_id": book.book_id}})
 
+
         try:
             response = requests.post(self.server_ip + '/borrow', json=borrow_list, timeout = self.timeout)
+            print(response.json())
+
             if response.status_code == 200:   #Success
                 book_circulations = []
                 for raw_book_circulation in response.json():
@@ -31,11 +34,17 @@ class BorrowManager(AbstractDAO):
                     due_time = book_circulations[0].due_time
                     print(str(due_time))
                     self.parent.borrowBookCallback(due_time)
+
+
+            else:  #Soft failed
+                self.parent.borrowBookCallback(None,response.json()["message"])
+
         except requests.exceptions.ConnectTimeout:  # Connection timeout, use offline mockup data
             self.parent.borrowBookCallback(datetime.now() + timedelta(days=7))
+            print("Borrow failed")
 
 
-        return book_circulations
+        # return book_circulations
 
     @staticmethod
     def construct_book_ciruclation(arguments):
