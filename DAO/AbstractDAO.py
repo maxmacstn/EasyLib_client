@@ -1,5 +1,3 @@
-import functools
-
 
 
 class AbstractDAO(object):

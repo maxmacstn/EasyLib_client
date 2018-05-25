@@ -134,7 +134,7 @@ class SmartLibGUI(QMainWindow, form_class):
         self.camIDscan.pause()
         self.validateStuID(self.lineEdit_userID.text())
 
-    def login_callback(self, user: UserDAO.Student):
+    def login_callback(self, user: UserDAO):
 
         # print("Got user data " + user.getName())
 
@@ -265,7 +265,8 @@ class SmartLibGUI(QMainWindow, form_class):
 
         if (self.scanMode == 2):
             if (scannerType == 0):
-                self.lineEdit_bookID.setText(data)
+                # self.lineEdit_bookID.setText(data)
+                self.queryBookInfo(data)
             if (scannerType == 1):
                 self.queryBookInfo(data, True)
 
