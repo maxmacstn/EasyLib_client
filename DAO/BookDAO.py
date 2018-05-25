@@ -12,11 +12,13 @@ class BookDAO(AbstractDAO):
 
     def getBookFromID(self, id):
         try:
-            response = requests.get(self.server_ip + '/book/' + str(id), timeout = self.timeout)
+            path = '/book/' + str(id)
+            response = requests.get(self.server_ip + path, timeout=self.timeout,
+                                    headers=self.get_authentication_header(path))
             book = None
-
             if response.status_code == 200:
                 book = self.constructBook(response.json())
+
         except Exception:  # Connection timeout, use offline mockup data
             if self.parent is not None:
                 self.parent.showError("Connection Error", "Please check your server connection.", 2)
@@ -29,7 +31,8 @@ class BookDAO(AbstractDAO):
 
     def getBookFromRFID_ID(self, rfid):
         try:
-            response = requests.get(self.server_ip + '/book/rfid/' + str(rfid), timeout = self.timeout)
+            path = '/book/rfid/' + str(rfid)
+            response = requests.get(self.server_ip + path, timeout=self.timeout,headers=self.get_authentication_header(path))
             book = None
             if response.status_code == 200:
                 book = self.constructBook(response.json())

@@ -16,11 +16,12 @@ class UserDAO(AbstractDAO):
     def getUserFromID(self, id):
         print("Get info id : " + str(id))
         try :
-            response = requests.get(self.server_ip + '/user/' + str(id), timeout = self.timeout)
+            path = '/user/' + str(id)
+            response = requests.get(self.server_ip + path, timeout=self.timeout,
+                                    headers=self.get_authentication_header(path))
             user = None
             if response.status_code == 200:   # Success
                 user = self.constructUser(response.json())
-
 
 
         except requests.exceptions.ConnectionError:  # Connection timeout, use offline mockup data
@@ -43,7 +44,9 @@ class UserDAO(AbstractDAO):
 
     def getUserFromRFID_ID(self, rfid):
         try:
-            response = requests.get(self.server_ip + '/user/rfid/' + str(rfid), timeout=self.timeout)
+            path = '/user/rfid/' + str(rfid)
+            response = requests.get(self.server_ip + path, timeout=self.timeout,
+                                    headers=self.get_authentication_header(path))
             user = None
             if response.status_code == 200:     #Success
                 user = self.constructUser(response.json())

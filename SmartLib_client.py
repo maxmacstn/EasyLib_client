@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtGui, uic, QtWebEngineWidgets
 from PyQt5.QtWidgets import *
 import sys, cv2, requests, json
-from DAO import UserDAO, BookDAO
+from DAO import UserDAO, BookDAO, LineNotificationDAO
 from CameraViewerWidget import CameraViewerWidget
 from DAO.AbstractDAO import AbstractDAO
 from Scanner.CameraScanner import CameraScanner
@@ -17,6 +17,9 @@ form_class = uic.loadUiType("easy_lib_client.ui")[0]
 
 # Catch Error and display through MessageBox
 def catch_exceptions(t, val, tb):
+    if t == RuntimeError:
+        print("Thread failed")
+        return
     QMessageBox.critical(None, "An exception was raised", "Exception type: {}".format(t))
     old_hook(t, val, tb)
 
@@ -444,9 +447,14 @@ class SmartLibGUI(QMainWindow, form_class):
 
             token = response_json['access_token']
 
-            print("Token " + token)
-            requests.put(AbstractDAO().server_ip + "/user/" + str(self.currentUser.user_id) + "/token",
-                        json={"line_token": token})
+            # response = requests.put(AbstractDAO().server_ip + "/user/" + str(self.currentUser.user_id) + "/token",
+            #             json={"line_token": token})
+            # print(response)
+
+
+            lineTokenDAO =  LineNotificationDAO.LineNotificationDAO(self)
+            if not lineTokenDAO.setToken(str(self.currentUser.user_id),token):
+                raise ConnectionError
             self.label_line_connect_status.setText("Connected to Line Notify")
 
         except Exception:
@@ -458,14 +466,17 @@ class SmartLibGUI(QMainWindow, form_class):
 
 
 def launch(cameraPort, RFIDPort):
+    print("--- Starting SmartLibrary... ---")
+    print("Camera port : "+ str(cameraPort) + "    RFID Port : " + str(RFIDPort))
     app = QApplication(sys.argv)
-    print("Hello")
     w = SmartLibGUI(None,cameraPort=cameraPort,rfidPort=RFIDPort)
     w.setWindowTitle('SmartLibrary - Book Scanner')
+    print("--- Welcome ---")
     w.show()
     app.exec_()
 
 
 
 if __name__ == '__main__':
+    print("Warning! Running in standalone mode")
     launch(0, "COM12")

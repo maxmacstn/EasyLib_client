@@ -7,10 +7,10 @@ import cv2
 CAM = 5
 
 def connectRFID():
-    print("Finding RFID Scanner device")
+    print("Discovering RFID Scanner device")
     serialResult = find_RFID_ports()
     if (len(serialResult) == 0):
-        print("No devices found")
+        # print("No devices found")
         return False
     else:
         return find_RFID_ports()[0]
@@ -54,6 +54,7 @@ def connectCamera():
     cv2.VideoCapture(CAM)
 
 if __name__ == '__main__':
+    print("--- Launching application ---")
     serial = connectRFID()
     if(not serial):
         print("Error connecting to serial RFID Scanner")
