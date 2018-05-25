@@ -85,6 +85,40 @@ class SmartLibGUI(QMainWindow, form_class):
 
         self.init_page_1()
 
+    def showError(self,errorContent,errorHeader ,page = None):
+
+
+        if page == None:
+            self.stackedWidget.setCurrentIndex(5)
+            self.label_error_page_content.setText(errorContent)
+            self.label_error_page_header.setText(errorHeader)
+            Timer(5, self.init_page_2).start()
+
+            return
+
+        if page == 1:
+            self.stackedWidget.setCurrentIndex(5)
+            self.label_error_page_content.setText(errorContent)
+            self.label_error_page_header.setText(errorHeader)
+            Timer(5, self.init_page_1).start()
+            return
+
+        if page == 2:
+            self.stackedWidget.setCurrentIndex(5)
+            self.label_error_page_content.setText(errorContent)
+            self.label_error_page_header.setText(errorHeader)
+            Timer(5, self.stackedWidget.setCurrentIndex, args=[2]).start()
+            self.progressBar_query.setVisible(False)
+
+        if page == 3:
+            self.stackedWidget.setCurrentIndex(5)
+            self.label_error_page_content.setText(errorContent)
+            self.label_error_page_header.setText(errorHeader)
+            Timer(5, self.init_page_2).start()
+
+
+
+
     def resizeEvent(self, event):
 
         print(str(self.verticalLayout.geometry().width()) + ", " + str(self.verticalLayout.geometry().height()))

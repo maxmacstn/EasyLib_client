@@ -22,6 +22,7 @@ class BorrowManager(AbstractDAO):
 
 
         try:
+            print(borrow_list)
             response = requests.post(self.server_ip + '/borrow', json=borrow_list, timeout = self.timeout)
             print(response.json())
 
@@ -39,8 +40,10 @@ class BorrowManager(AbstractDAO):
             else:  #Soft failed
                 self.parent.borrowBookCallback(None,response.json()["message"])
 
-        except requests.exceptions.ConnectTimeout:  # Connection timeout, use offline mockup data
-            self.parent.borrowBookCallback(datetime.now() + timedelta(days=7))
+        except Exception:  # Connection timeout, use offline mockup data
+            if self.parent is not None:
+                self.parent.showError("Connection Error", "Please check your server connection.", 3)
+            return
             print("Borrow failed")
 
 
