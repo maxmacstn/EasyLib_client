@@ -274,7 +274,7 @@
               </property>
               <layout class="QGridLayout" name="gridLayout_3">
                <item row="1" column="0">
-                <widget class="QWidget" name="CamView_1" native="true">
+                <widget class="QWidget" name="camViewWidget_ID" native="true">
                  <property name="minimumSize">
                   <size>
                    <width>320</width>
@@ -1081,7 +1081,7 @@
              <item>
               <widget class="QTabWidget" name="tabWidget">
                <property name="currentIndex">
-                <number>1</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="tab_camera">
                 <attribute name="title">
@@ -1089,7 +1089,7 @@
                 </attribute>
                 <layout class="QVBoxLayout" name="verticalLayout_7">
                  <item>
-                  <widget class="QWidget" name="CamView_2" native="true">
+                  <widget class="QWidget" name="camViewWidget_Book" native="true">
                    <property name="minimumSize">
                     <size>
                      <width>320</width>

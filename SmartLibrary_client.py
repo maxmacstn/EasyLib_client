@@ -35,6 +35,13 @@ class SmartLibGUI(QMainWindow, form_class):
         self.setupUi(self)
 
         '''
+              Initialize hardware input
+        '''
+        self.cameraScanner = CameraScanner(self, 1280, 720, 10, cameraPort)
+        self.RFIDScanner = RFIDScanner(self, rfidPort)
+
+
+        '''
                 Initialize Data access object
 
         '''
@@ -89,13 +96,8 @@ class SmartLibGUI(QMainWindow, form_class):
         self.scanMode = 1                    # scanner scan mode (id or books)
         self.bookBasket = []                 # Book basket for borrow
 
-        '''
-            Initialize hardware input
-        '''
-        self.cameraScanner = CameraScanner(self, 1280, 720, 10, cameraPort)
-        self.RFIDScanner = RFIDScanner(self, rfidPort)
-        # self.button_num_in_1.clicked.connect(lambda :self.addInputFromKeypad(1,1))
-        # print(self.__dict__)
+
+
         self.initKeypad()
         self.init_page_1()
 
