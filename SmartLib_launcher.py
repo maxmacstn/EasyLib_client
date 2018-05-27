@@ -1,4 +1,4 @@
-import SmartLib_client
+import SmartLibrary_client
 import serial.tools.list_ports
 import sys
 import glob
@@ -60,6 +60,6 @@ if __name__ == '__main__':
         print("Error connecting to serial RFID Scanner")
     else:
         print("Connected to RFID Sensor at " + serial)
-    SmartLib_client.launch(0,serial)
+    SmartLibrary_client.launch(0, serial)
 
 
