@@ -47,17 +47,17 @@ class SmartLibGUI(QMainWindow, form_class):
         '''
         self.window_width_idScan = self.groupBox_scanner.geometry().width()
         self.window_height_idScan = self.groupBox_scanner.geometry().height()
-        self.CamView_1 = CameraViewerWidget(self.CamView_1)
-        self.timer1 = QtCore.QTimer(self)
-        self.timer1.timeout.connect(self.update_id_frame)
-        self.timer1.start(1)
+        self.camViewWidget_ID = CameraViewerWidget(self.camViewWidget_ID)
+        self.idFrameUpdater = QtCore.QTimer(self)
+        self.idFrameUpdater.timeout.connect(self.update_id_frame)
+        self.idFrameUpdater.start(1)
 
         self.window_width_bookScan = self.tab_camera.geometry().width()
         self.window_height_bookScan = self.tab_camera.geometry().height()
-        self.CamView_2 = CameraViewerWidget(self.CamView_2)
-        self.timer2 = QtCore.QTimer(self)
-        self.timer2.timeout.connect(self.update_book_frame)
-        self.timer2.start(1)
+        self.camViewWidget_Book = CameraViewerWidget(self.camViewWidget_Book)
+        self.bookFrameUpdater = QtCore.QTimer(self)
+        self.bookFrameUpdater.timeout.connect(self.update_book_frame)
+        self.bookFrameUpdater.start(1)
 
         '''
             Setup UI components
@@ -92,7 +92,7 @@ class SmartLibGUI(QMainWindow, form_class):
         '''
             Initialize hardware input
         '''
-        self.camIDscan = CameraScanner(self, 1280, 720, 10, cameraPort)
+        self.cameraScanner = CameraScanner(self, 1280, 720, 10, cameraPort)
         self.RFIDScanner = RFIDScanner(self, rfidPort)
         # self.button_num_in_1.clicked.connect(lambda :self.addInputFromKeypad(1,1))
         # print(self.__dict__)
@@ -183,7 +183,7 @@ class SmartLibGUI(QMainWindow, form_class):
 
     # When user clicked on login button on first page
     def login_clicked(self):
-        self.camIDscan.pause()
+        self.cameraScanner.pause()
         self.validateStuID(self.lineEdit_userID.text())
 
     # Callback function from UserDao (observer)
@@ -202,7 +202,7 @@ class SmartLibGUI(QMainWindow, form_class):
 
     # Back button to page 1
     def onButtonToPage1(self):
-        self.camIDscan.pause()
+        self.cameraScanner.pause()
         self.init_page_1()
 
     # Initialize page 1(Login page)
@@ -213,10 +213,10 @@ class SmartLibGUI(QMainWindow, form_class):
         self.stackedWidget.setCurrentIndex(0)
         self.clearBook()
 
-        if not self.camIDscan.isAlive():
-            self.camIDscan.start()
+        if not self.cameraScanner.isAlive():
+            self.cameraScanner.start()
         else:
-            self.camIDscan.resume()
+            self.cameraScanner.resume()
 
         if not self.RFIDScanner.isAlive():
             self.RFIDScanner.start()
@@ -234,10 +234,10 @@ class SmartLibGUI(QMainWindow, form_class):
         self.lineEdit_bookID.setText("")
         self.stackedWidget.setCurrentIndex(2)
         self.progressBar_query.setVisible(False)
-        if not self.camIDscan.isAlive():
-            self.camIDscan.start()
+        if not self.cameraScanner.isAlive():
+            self.cameraScanner.start()
         else:
-            self.camIDscan.resume()
+            self.cameraScanner.resume()
 
     # Update image frame for Login page
     def update_id_frame(self):
@@ -246,8 +246,8 @@ class SmartLibGUI(QMainWindow, form_class):
 
         self.window_width_idScan = self.groupBox_scanner.geometry().width()
         self.window_height_idScan = self.groupBox_scanner.geometry().height()
-        if not self.camIDscan.getImageQueue().empty():
-            frame = self.camIDscan.getImageQueue().get()
+        if not self.cameraScanner.getImageQueue().empty():
+            frame = self.cameraScanner.getImageQueue().get()
             img = frame["img"]
 
             try:
@@ -267,7 +267,7 @@ class SmartLibGUI(QMainWindow, form_class):
             height, width, bpc = img.shape
             bpl = bpc * width
             image = QtGui.QImage(img.data, width, height, bpl, QtGui.QImage.Format_RGB888).mirrored(True, False)
-            self.CamView_1.setImage(image)
+            self.camViewWidget_ID.setImage(image)
 
     # Update image frame for Borrow page
     def update_book_frame(self):
@@ -277,13 +277,13 @@ class SmartLibGUI(QMainWindow, form_class):
         self.window_height_bookScan = self.groupBox_scanner.geometry().height()
         # self.window_height = self.groupBox_scanner.geometry().width() *16 /9
         try:
-            if self.camIDscan == None:
+            if self.cameraScanner == None:
                 return
         except AttributeError:
             return
-        if not self.camIDscan.getImageQueue().empty():
+        if not self.cameraScanner.getImageQueue().empty():
             # self.startButton.setText('Camera is live')
-            frame = self.camIDscan.getImageQueue().get()
+            frame = self.cameraScanner.getImageQueue().get()
             img = frame["img"]
             try:
                 img_height, img_width, img_colors = img.shape
@@ -302,7 +302,7 @@ class SmartLibGUI(QMainWindow, form_class):
             bpl = bpc * width
 
             image = QtGui.QImage(img.data, width, height, bpl, QtGui.QImage.Format_RGB888).mirrored(True, False)
-            self.CamView_2.setImage(image)
+            self.camViewWidget_Book.setImage(image)
 
     # Hardware scanner callback function (When hardware device got data) - Observer
     def scannerCallback(self, data, scannerType=0):
@@ -321,12 +321,12 @@ class SmartLibGUI(QMainWindow, form_class):
 
     # on close
     def closeEvent(self, event):
-        self.camIDscan.pause()
+        self.cameraScanner.pause()
         self.destroy()
 
 
     def validateStuID(self, ID, isRFID_id=False):
-        self.camIDscan.pause()
+        self.cameraScanner.pause()
         self.stackedWidget.setCurrentIndex(1)
 
         if (isRFID_id):
@@ -388,7 +388,7 @@ class SmartLibGUI(QMainWindow, form_class):
             self.label_borrow_error.show()
             Timer(5, self.hideErrorMessage).start()
             return
-        self.camIDscan.pause()
+        self.cameraScanner.pause()
         borrowManager = BookCirculationDAO.BookCirculationDAO(self)
         Thread(target=borrowManager.borrow, args=[self.currentUser, self.bookBasket]).start()
         self.stackedWidget.setCurrentIndex(1)
@@ -401,7 +401,7 @@ class SmartLibGUI(QMainWindow, form_class):
     def borrowBookCallback(self, returnDate, error_clause = None):
         # Borrow failed
         if returnDate == None:
-            self.camIDscan.resume()
+            self.cameraScanner.resume()
             self.stackedWidget.setCurrentIndex(2)
             self.label_borrow_error.setText("Error borrow book : "+ error_clause)
             self.label_borrow_error.show()
@@ -420,7 +420,7 @@ class SmartLibGUI(QMainWindow, form_class):
     def onLineConnectButtonClicked(self):
         self.webView.setFixedHeight(724)
         self.webView.setFixedWidth(1300)
-        self.camIDscan.pause()
+        self.cameraScanner.pause()
         self.stackedWidget.setCurrentIndex(4)
         self.webView.show()
         self.label_line_connect_status.hide()
