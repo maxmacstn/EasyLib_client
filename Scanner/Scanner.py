@@ -12,6 +12,7 @@ class Scanner(threading.Thread):
     def run(self):
         pass
 
+
     def pause(self):
         pass
 

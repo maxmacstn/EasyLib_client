@@ -39,7 +39,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="login_page">
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -346,7 +346,7 @@
              <item row="1" column="0">
               <layout class="QGridLayout" name="gridLayout_Keypad">
                <item row="1" column="0">
-                <widget class="QPushButton" name="button_num_in_13">
+                <widget class="QPushButton" name="button_num_in_4">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                    <horstretch>0</horstretch>
@@ -379,7 +379,7 @@
                 </widget>
                </item>
                <item row="0" column="2">
-                <widget class="QPushButton" name="button_num_in_11">
+                <widget class="QPushButton" name="button_num_in_3">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                    <horstretch>0</horstretch>
@@ -412,7 +412,7 @@
                 </widget>
                </item>
                <item row="0" column="0">
-                <widget class="QPushButton" name="button_num_in_12">
+                <widget class="QPushButton" name="button_num_in_1">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                    <horstretch>0</horstretch>
@@ -445,7 +445,7 @@
                 </widget>
                </item>
                <item row="0" column="1">
-                <widget class="QPushButton" name="button_num_in_10">
+                <widget class="QPushButton" name="button_num_in_2">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                    <horstretch>0</horstretch>
@@ -478,7 +478,7 @@
                 </widget>
                </item>
                <item row="2" column="1">
-                <widget class="QPushButton" name="button_num_in_18">
+                <widget class="QPushButton" name="button_num_in_8">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                    <horstretch>0</horstretch>
@@ -511,7 +511,7 @@
                 </widget>
                </item>
                <item row="2" column="2">
-                <widget class="QPushButton" name="button_num_in_17">
+                <widget class="QPushButton" name="button_num_in_9">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                    <horstretch>0</horstretch>
@@ -544,7 +544,7 @@
                 </widget>
                </item>
                <item row="3" column="0">
-                <widget class="QPushButton" name="button_num_in_clear_2">
+                <widget class="QPushButton" name="button_num_in_clear">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                    <horstretch>0</horstretch>
@@ -577,7 +577,7 @@
                 </widget>
                </item>
                <item row="3" column="1">
-                <widget class="QPushButton" name="button_num_in_19">
+                <widget class="QPushButton" name="button_num_in_0">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                    <horstretch>0</horstretch>
@@ -610,7 +610,7 @@
                 </widget>
                </item>
                <item row="3" column="2">
-                <widget class="QPushButton" name="button_num_in_del_2">
+                <widget class="QPushButton" name="button_num_in_del">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                    <horstretch>0</horstretch>
@@ -643,7 +643,7 @@
                 </widget>
                </item>
                <item row="1" column="1">
-                <widget class="QPushButton" name="button_num_in_14">
+                <widget class="QPushButton" name="button_num_in_5">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                    <horstretch>0</horstretch>
@@ -676,7 +676,7 @@
                 </widget>
                </item>
                <item row="1" column="2">
-                <widget class="QPushButton" name="button_num_in_15">
+                <widget class="QPushButton" name="button_num_in_6">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                    <horstretch>0</horstretch>
@@ -709,7 +709,7 @@
                 </widget>
                </item>
                <item row="2" column="0">
-                <widget class="QPushButton" name="button_num_in_16">
+                <widget class="QPushButton" name="button_num_in_7">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                    <horstretch>0</horstretch>
@@ -966,6 +966,12 @@
             <layout class="QVBoxLayout" name="verticalLayout_5">
              <item>
               <widget class="QTableWidget" name="tableWidget_addBooks">
+               <property name="font">
+                <font>
+                 <family>Roboto</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
                <property name="sizeAdjustPolicy">
                 <enum>QAbstractScrollArea::AdjustToContents</enum>
                </property>
@@ -973,11 +979,16 @@
                 <set>QAbstractItemView::NoEditTriggers</set>
                </property>
                <property name="rowCount">
-                <number>0</number>
+                <number>1</number>
                </property>
                <property name="columnCount">
                 <number>3</number>
                </property>
+               <row>
+                <property name="text">
+                 <string>test</string>
+                </property>
+               </row>
                <column>
                 <property name="text">
                  <string>ID</string>
@@ -1070,7 +1081,7 @@
              <item>
               <widget class="QTabWidget" name="tabWidget">
                <property name="currentIndex">
-                <number>0</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="tab_camera">
                 <attribute name="title">
@@ -1103,7 +1114,7 @@
                  <item>
                   <layout class="QGridLayout" name="gridLayout_Keypad_2">
                    <item row="2" column="1">
-                    <widget class="QPushButton" name="button_num_in_24">
+                    <widget class="QPushButton" name="button_num_in_8b">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                        <horstretch>0</horstretch>
@@ -1136,7 +1147,7 @@
                     </widget>
                    </item>
                    <item row="2" column="2">
-                    <widget class="QPushButton" name="button_num_in_25">
+                    <widget class="QPushButton" name="button_num_in_9b">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                        <horstretch>0</horstretch>
@@ -1169,7 +1180,7 @@
                     </widget>
                    </item>
                    <item row="0" column="1">
-                    <widget class="QPushButton" name="button_num_in_23">
+                    <widget class="QPushButton" name="button_num_in_2b">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                        <horstretch>0</horstretch>
@@ -1202,7 +1213,7 @@
                     </widget>
                    </item>
                    <item row="0" column="2">
-                    <widget class="QPushButton" name="button_num_in_21">
+                    <widget class="QPushButton" name="button_num_in_3b">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                        <horstretch>0</horstretch>
@@ -1235,7 +1246,7 @@
                     </widget>
                    </item>
                    <item row="1" column="0">
-                    <widget class="QPushButton" name="button_num_in_20">
+                    <widget class="QPushButton" name="button_num_in_4b">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                        <horstretch>0</horstretch>
@@ -1268,7 +1279,7 @@
                     </widget>
                    </item>
                    <item row="1" column="1">
-                    <widget class="QPushButton" name="button_num_in_27">
+                    <widget class="QPushButton" name="button_num_in_5b">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                        <horstretch>0</horstretch>
@@ -1301,7 +1312,7 @@
                     </widget>
                    </item>
                    <item row="1" column="2">
-                    <widget class="QPushButton" name="button_num_in_28">
+                    <widget class="QPushButton" name="button_num_in_6b">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                        <horstretch>0</horstretch>
@@ -1334,7 +1345,7 @@
                     </widget>
                    </item>
                    <item row="2" column="0">
-                    <widget class="QPushButton" name="button_num_in_29">
+                    <widget class="QPushButton" name="button_num_in_7b">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                        <horstretch>0</horstretch>
@@ -1367,7 +1378,7 @@
                     </widget>
                    </item>
                    <item row="0" column="0">
-                    <widget class="QPushButton" name="button_num_in_22">
+                    <widget class="QPushButton" name="button_num_in_1b">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                        <horstretch>0</horstretch>
@@ -1400,7 +1411,7 @@
                     </widget>
                    </item>
                    <item row="3" column="0">
-                    <widget class="QPushButton" name="button_num_in_clear_3">
+                    <widget class="QPushButton" name="button_num_in_clearb">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                        <horstretch>0</horstretch>
@@ -1433,7 +1444,7 @@
                     </widget>
                    </item>
                    <item row="3" column="1">
-                    <widget class="QPushButton" name="button_num_in_26">
+                    <widget class="QPushButton" name="button_num_in_0b">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                        <horstretch>0</horstretch>
@@ -1466,7 +1477,7 @@
                     </widget>
                    </item>
                    <item row="3" column="2">
-                    <widget class="QPushButton" name="button_num_in_del_3">
+                    <widget class="QPushButton" name="button_num_in_delb">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                        <horstretch>0</horstretch>

@@ -10,7 +10,7 @@ from DAO.UserDAO import UserDAO
 from constant import *
 
 
-class BorrowManager(AbstractDAO):
+class BookCirculationDAO(AbstractDAO):
     def __init__(self, parent = None):
         AbstractDAO.__init__(self)
         self.parent = parent

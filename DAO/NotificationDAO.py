@@ -1,7 +1,7 @@
 from  DAO.AbstractDAO import AbstractDAO
 import requests
 
-class LineNotificationDAO(AbstractDAO):
+class NotificationDAO(AbstractDAO):
     def __init__(self, parent=None):
         AbstractDAO.__init__(self)
         self.parent = parent

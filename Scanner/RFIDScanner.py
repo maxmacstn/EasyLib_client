@@ -7,7 +7,6 @@ class RFIDScanner(threading.Thread):
     def __init__(self, parent,SERIAL_PORT=None):
         threading.Thread.__init__(self)
         self.parent = parent
-        self.queue = Queue()
         self.running = True
         self.isConnected = True
 
