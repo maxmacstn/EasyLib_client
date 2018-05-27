@@ -10,7 +10,7 @@ from DAO.UserDAO import UserDAO
 from constant import *
 
 
-class BorrowManager(AbstractDAO):
+class BookCirculationDAO(AbstractDAO):
     def __init__(self, parent = None):
         AbstractDAO.__init__(self)
         self.parent = parent
@@ -23,7 +23,9 @@ class BorrowManager(AbstractDAO):
 
         try:
             print(borrow_list)
-            response = requests.post(self.server_ip + '/borrow', json=borrow_list, timeout = self.timeout)
+            path = '/borrow'
+            response = requests.post(self.server_ip + path, json=borrow_list, timeout=self.timeout,
+                                     headers=self.get_authentication_header(path))
             print(response.json())
 
             if response.status_code == 200:   #Success
